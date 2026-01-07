@@ -1,0 +1,22 @@
+[
+  { "data": { "id": "1MVS05" } },
+  { "data": { "id": "1MVS07" } },
+
+  { "data": { "id": "Data Hall 6.1", "parent": "1MVS05" } },
+  { "data": { "id": "Data Hall 6.2", "parent": "1MVS05" } },
+
+  { "data": { "id": "Data Hall 5.1", "parent": "1MVS07" } },
+  { "data": { "id": "Data Hall 5.2", "parent": "1MVS07" } },
+
+  { "data": { "id": "Gen01-6.1", "parent": "Data Hall 6.1" } },
+  { "data": { "id": "Gen02-6.1", "parent": "Data Hall 6.1" } },
+
+  { "data": { "id": "Gen01-6.2", "parent": "Data Hall 6.2" } },
+  { "data": { "id": "Gen02-6.2", "parent": "Data Hall 6.2" } },
+
+  { "data": { "id": "Gen01-5.1", "parent": "Data Hall 5.1" } },
+  { "data": { "id": "Gen02-5.1", "parent": "Data Hall 5.1" } },
+
+  { "data": { "id": "Gen01-5.2", "parent": "Data Hall 5.2" } },
+  { "data": { "id": "Gen02-5.2", "parent": "Data Hall 5.2" } }
+]

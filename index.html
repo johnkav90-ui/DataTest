@@ -2,83 +2,114 @@
 <html>
 <head>
   <meta charset="utf-8" />
-  <title>Collapsible Tree Example</title>
+  <title>Collapsible Tree with Edges</title>
   <script src="https://unpkg.com/cytoscape/dist/cytoscape.min.js"></script>
   <script src="https://unpkg.com/cytoscape-expand-collapse/cytoscape-expand-collapse.js"></script>
-  <link rel="stylesheet" href="style.css">
   <style>
     body { margin: 0; }
-    #cy { width: 100vw; height: 100vh; display: block; }
+    #cy { width: 100vw; height: 100vh; }
   </style>
 </head>
 <body>
   <div id="cy"></div>
 
   <script>
-    fetch('tree.json')
-      .then(res => res.json())
-      .then(elements => {
-        const cy = cytoscape({
-          container: document.getElementById('cy'),
-          elements: elements,
-          layout: {
-            name: 'breadthfirst',
-            directed: true,
-            orientation: 'vertical', // children below parent
-            padding: 20,
-            spacingFactor: 1.5
-          },
-          style: [
-            {
-              selector: 'node',
-              style: {
-                'label': 'data(id)',
-                'background-color': '#4a90e2',
-                'text-valign': 'center',
-                'color': '#fff',
-                'width': 'label',
-                'height': 'label',
-                'padding': '10px'
-              }
-            },
-            {
-              selector: ':parent',
-              style: {
-                'background-opacity': 0.1,
-                'border-width': 2,
-                'border-color': '#333'
-              }
-            },
-            {
-              selector: 'edge',
-              style: {
-                'width': 2,
-                'line-color': '#555',
-                'target-arrow-shape': 'triangle',
-                'target-arrow-color': '#555',
-                'curve-style': 'bezier'
-              }
-            }
-          ]
-        });
+    const elements = [
+      // Level 1
+      { data: { id: '1MVS05' } },
+      { data: { id: '1MVS07' } },
 
-        // Enable expand/collapse
-        const api = cy.expandCollapse({
-          layoutBy: null, // keep layout static
-          animate: false,
-          fisheye: false,
-          undoable: false
-        });
+      // Level 2
+      { data: { id: 'Data Hall 6.1' } },
+      { data: { id: 'Data Hall 6.2' } },
+      { data: { id: 'Data Hall 5.1' } },
+      { data: { id: 'Data Hall 5.2' } },
 
-        cy.on('tap', 'node', evt => {
-          const node = evt.target;
-          if (node.isParent()) {
-            api.isCollapsed(node) ? api.expand(node) : api.collapse(node);
+      // Level 3
+      { data: { id: 'Gen01-6.1' } },
+      { data: { id: 'Gen02-6.1' } },
+      { data: { id: 'Gen01-6.2' } },
+      { data: { id: 'Gen02-6.2' } },
+      { data: { id: 'Gen01-5.1' } },
+      { data: { id: 'Gen02-5.1' } },
+      { data: { id: 'Gen01-5.2' } },
+      { data: { id: 'Gen02-5.2' } },
+
+      // Edges: Level 1 -> Level 2
+      { data: { id: 'e1', source: '1MVS05', target: 'Data Hall 6.1' } },
+      { data: { id: 'e2', source: '1MVS05', target: 'Data Hall 6.2' } },
+      { data: { id: 'e3', source: '1MVS07', target: 'Data Hall 5.1' } },
+      { data: { id: 'e4', source: '1MVS07', target: 'Data Hall 5.2' } },
+
+      // Edges: Level 2 -> Level 3
+      { data: { id: 'e5', source: 'Data Hall 6.1', target: 'Gen01-6.1' } },
+      { data: { id: 'e6', source: 'Data Hall 6.1', target: 'Gen02-6.1' } },
+      { data: { id: 'e7', source: 'Data Hall 6.2', target: 'Gen01-6.2' } },
+      { data: { id: 'e8', source: 'Data Hall 6.2', target: 'Gen02-6.2' } },
+      { data: { id: 'e9', source: 'Data Hall 5.1', target: 'Gen01-5.1' } },
+      { data: { id: 'e10', source: 'Data Hall 5.1', target: 'Gen02-5.1' } },
+      { data: { id: 'e11', source: 'Data Hall 5.2', target: 'Gen01-5.2' } },
+      { data: { id: 'e12', source: 'Data Hall 5.2', target: 'Gen02-5.2' } }
+    ];
+
+    const cy = cytoscape({
+      container: document.getElementById('cy'),
+      elements: elements,
+      layout: {
+        name: 'breadthfirst',
+        directed: true,
+        orientation: 'vertical',
+        padding: 20,
+        spacingFactor: 1.5
+      },
+      style: [
+        {
+          selector: 'node',
+          style: {
+            'label': 'data(id)',
+            'background-color': '#4a90e2',
+            'text-valign': 'center',
+            'color': '#fff',
+            'width': 'label',
+            'height': 'label',
+            'padding': '10px'
           }
-        });
+        },
+        {
+          selector: 'edge',
+          style: {
+            'width': 2,
+            'line-color': '#555',
+            'target-arrow-shape': 'triangle',
+            'target-arrow-color': '#555',
+            'curve-style': 'bezier'
+          }
+        }
+      ]
+    });
 
-        cy.nodes().lock(); // static positions
-      });
+    // Enable expand/collapse using edges (no compound nodes needed)
+    const api = cy.expandCollapse({
+      layoutBy: {
+        name: 'breadthfirst',
+        directed: true,
+        orientation: 'vertical',
+        spacingFactor: 1.5
+      },
+      fisheye: false,
+      animate: false,
+      undoable: false
+    });
+
+    // Click nodes to toggle expand/collapse
+    cy.on('tap', 'node', evt => {
+      const node = evt.target;
+      if (api.isCollapsible(node)) {
+        api.isCollapsed(node) ? api.expand(node) : api.collapse(node);
+      }
+    });
+
+    cy.nodes().lock();
   </script>
 </body>
 </html>

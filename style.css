@@ -6,13 +6,3 @@ node:parent {
   border-color: #333;
   background-opacity: 0.1;
 }
-{
-  selector: 'edge',
-  style: {
-    'width': 2,
-    'line-color': '#555',
-    'target-arrow-shape': 'triangle',
-    'target-arrow-color': '#555',
-    'curve-style': 'bezier'
-  }
-}

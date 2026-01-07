@@ -1,22 +1,35 @@
 [
+  // Level 1
   { "data": { "id": "1MVS05" } },
   { "data": { "id": "1MVS07" } },
 
+  // Level 2
   { "data": { "id": "Data Hall 6.1", "parent": "1MVS05" } },
   { "data": { "id": "Data Hall 6.2", "parent": "1MVS05" } },
-
   { "data": { "id": "Data Hall 5.1", "parent": "1MVS07" } },
   { "data": { "id": "Data Hall 5.2", "parent": "1MVS07" } },
 
+  // Level 3
   { "data": { "id": "Gen01-6.1", "parent": "Data Hall 6.1" } },
   { "data": { "id": "Gen02-6.1", "parent": "Data Hall 6.1" } },
-
   { "data": { "id": "Gen01-6.2", "parent": "Data Hall 6.2" } },
   { "data": { "id": "Gen02-6.2", "parent": "Data Hall 6.2" } },
-
   { "data": { "id": "Gen01-5.1", "parent": "Data Hall 5.1" } },
   { "data": { "id": "Gen02-5.1", "parent": "Data Hall 5.1" } },
-
   { "data": { "id": "Gen01-5.2", "parent": "Data Hall 5.2" } },
-  { "data": { "id": "Gen02-5.2", "parent": "Data Hall 5.2" } }
+  { "data": { "id": "Gen02-5.2", "parent": "Data Hall 5.2" } },
+
+  // Edges (parent -> child)
+  { "data": { "id": "e1", "source": "1MVS05", "target": "Data Hall 6.1" } },
+  { "data": { "id": "e2", "source": "1MVS05", "target": "Data Hall 6.2" } },
+  { "data": { "id": "e3", "source": "1MVS07", "target": "Data Hall 5.1" } },
+  { "data": { "id": "e4", "source": "1MVS07", "target": "Data Hall 5.2" } },
+  { "data": { "id": "e5", "source": "Data Hall 6.1", "target": "Gen01-6.1" } },
+  { "data": { "id": "e6", "source": "Data Hall 6.1", "target": "Gen02-6.1" } },
+  { "data": { "id": "e7", "source": "Data Hall 6.2", "target": "Gen01-6.2" } },
+  { "data": { "id": "e8", "source": "Data Hall 6.2", "target": "Gen02-6.2" } },
+  { "data": { "id": "e9", "source": "Data Hall 5.1", "target": "Gen01-5.1" } },
+  { "data": { "id": "e10", "source": "Data Hall 5.1", "target": "Gen02-5.1" } },
+  { "data": { "id": "e11", "source": "Data Hall 5.2", "target": "Gen01-5.2" } },
+  { "data": { "id": "e12", "source": "Data Hall 5.2", "target": "Gen02-5.2" } }
 ]

@@ -1,0 +1,6 @@
+body { font-family: Arial, sans-serif; }
+#cy { background-color: #f5f5f5; }
+
+.node-collapsed {
+  background-color: #ffa500 !important;
+}

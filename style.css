@@ -1,6 +1,8 @@
 body { font-family: Arial, sans-serif; }
 #cy { background-color: #f5f5f5; }
 
-.node-collapsed {
-  background-color: #ffa500 !important;
+/* Example: highlight collapsed parent nodes */
+node:parent {
+  border-color: #333;
+  background-opacity: 0.1;
 }
